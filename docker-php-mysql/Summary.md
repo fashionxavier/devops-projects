@@ -51,6 +51,7 @@ Quick start (without Docker Compose)
    docker run -d --name mysql-container --network app-network -p 3306:3306 custom-mysql
   ```
 The Dockerfile for MySQL
+
    ```
    FROM mysql:8.0
    ENV MYSQL_ROOT_PASSWORD=root
@@ -59,16 +60,21 @@ The Dockerfile for MySQL
    ENV MYSQL_PASSWORD=testpass
    COPY init.sql /docker-entrypoint-initdb.d/
    ```
+
+
 4.  Build the php container.
     ```
    sudo docker build -t php-frontend .
-    ``` 
+    ```
+ 
 5. Run the php container.
-
    ```
     docker run -d --name php-container --network app-network -p 8082:80 php-frontend
     ```
+    
 The Dockerfile for the php
+
+
    ```
    FROM php:8.2-apache
    RUN docker-php-ext-install mysqli
