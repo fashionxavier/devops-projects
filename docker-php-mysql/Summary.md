@@ -48,10 +48,10 @@ Quick start (without Docker Compose)
   ```
 3. Run the MySQL container and the Dockerfile configuration
    ```
-   docker run -d \                                   
-  --name mysql-container \
-  --network app-network \
-  -p 3306:3306 \
+   docker run -d |                                   
+  --name mysql-container |
+  --network app-network |
+  -p 3306:3306 |
   custom-mysql
   ```
    ```
@@ -69,10 +69,10 @@ Quick start (without Docker Compose)
 5. Run the php container.
 
    ```
-    docker run -d \                 
-  --name php-container \
-  --network app-network \
-  -p 8082:80 --restart unless-stopped\
+    docker run -d |                
+  --name php-container |
+  --network app-network |
+  -p 8082:80 |
   php-frontend
     ```
    ```
