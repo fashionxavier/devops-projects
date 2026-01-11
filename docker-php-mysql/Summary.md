@@ -1,19 +1,19 @@
 # Project Summary
 
-This project demonstrates how to run a simple PHP application together with a MySQL database using Docker containers. It is an introductory DevOps / containerization project intended to show how services can be separated into containers and connected on a Docker network without using Docker Compose.
+This project demonstrates how to run a simple PHP application together with a MySQL database using Docker containers. It is an introductory DevOps / containerization project intended to show how services can be split into separate containers and networked together.
 
 Goals
 - Show how to containerize a PHP application and a MySQL database.
 - Demonstrate container-to-container networking with Docker.
 - Provide a minimal, reproducible example that can be extended.
 
-###Technologies used
+### Technologies used
 - Docker (containerization)
 - Docker Network (to enable communication across the containers)
 - PHP (application code)
 - MySQL (relational database)
 
-###Architecture
+### Architecture
 ```
 docker-php-mysql
 ├── mysql
@@ -28,6 +28,7 @@ docker-php-mysql
 ├── main.tf
 └── README.md
 ```
+
 This indicates two Docker containers (one for PHP and one for MySQL) connected on a user-defined network, allowing the PHP app to access the database by container name.
 
 What the project includes
@@ -37,50 +38,46 @@ What the project includes
 - (Optionally) Terraform files / other infra files under `main.tf` for deployment examples.
 
 Quick start (without Docker Compose)
+
 1. From the project root, create a user-defined bridge network so containers can reach each other by name:
    ```
    docker network create app-network
    ```
 
-2. Build the MySQL container.
-  ```
-  sudo docker build -t custom-mysql .
-  ```
-3. Run the MySQL container and the Dockerfile configuration
+2. Build the MySQL container:
+   ```
+   sudo docker build -t custom-mysql ./mysql
+   ```
+
+3. Run the MySQL container:
    ```
    docker run -d --name mysql-container --network app-network -p 3306:3306 custom-mysql
-  ```
-The Dockerfile for MySQL
-
-   ```
-   FROM mysql:8.0
-   ENV MYSQL_ROOT_PASSWORD=root
-   ENV MYSQL_DATABASE=testdb
-   ENV MYSQL_USER=testuser
-   ENV MYSQL_PASSWORD=testpass
-   COPY init.sql /docker-entrypoint-initdb.d/
    ```
 
+MySQL Dockerfile:
+```
+FROM mysql:8.0
+ENV MYSQL_ROOT_PASSWORD=root
+ENV MYSQL_DATABASE=testdb
+ENV MYSQL_USER=testuser
+ENV MYSQL_PASSWORD=testpass
+COPY init.sql /docker-entrypoint-initdb.d/
+```
 
-4.  Build the php container.
-    ```
-   sudo docker build -t php-frontend .
-    ```
- 
-5. Run the php container.
-   ```
-    docker run -d --name php-container --network app-network -p 8082:80 php-frontend
-    ```
-    
-The Dockerfile for the php
+4. Build the PHP container:
+```
+sudo docker build -t php-frontend ./php
+```
 
+5. Run the PHP container:
+```
+docker run -d --name php-container --network app-network -p 8082:80 php-frontend
+```
 
-   ```
-   FROM php:8.2-apache
-   RUN docker-php-ext-install mysqli
-   COPY . /var/www/html/
-   EXPOSE 80
-   ```
-   
-   
-
+PHP Dockerfile:
+```
+FROM php:8.2-apache
+RUN docker-php-ext-install mysqli
+COPY . /var/www/html/
+EXPOSE 80
+```
