@@ -46,7 +46,7 @@ Quick start (without Docker Compose)
 
 2. Build the MySQL container:
    ```
-   sudo docker build -t custom-mysql ./mysql
+   sudo docker build -t custom-mysql .
    ```
 
 3. Run the MySQL container:
@@ -66,7 +66,7 @@ COPY init.sql /docker-entrypoint-initdb.d/
 
 4. Build the PHP container:
 ```
-sudo docker build -t php-frontend ./php
+sudo docker build -t php-frontend .
 ```
 
 5. Run the PHP container:
