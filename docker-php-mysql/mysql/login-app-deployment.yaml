@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: login-app
+  namespace: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: login-app
+  template:
+    metadata:
+      labels:
+        app: login-app
+    spec:
+      containers:
+      - name: login-app
+        image: fashionxavier/simple-login:1.2.1
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DB_HOST
+          value: mysql.database.svc.cluster.local
+        - name: DB_NAME
+          value: appdb
+        envFrom:
+        - secretRef:
+            name: db-secret

@@ -1,0 +1,33 @@
+
+body {
+  background: linear-gradient(to bottom right, #4a90e2, #9013fe);
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  padding-top: 80px;
+}
+
+h1 {
+  font-size: 3rem;
+  text-shadow: 2px 2px #00000033;
+}
+
+form input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background: #000000aa;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ffffff44;
+}
