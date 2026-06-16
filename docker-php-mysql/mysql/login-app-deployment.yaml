@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: login-app
-        image: fashionxavier/simple-login:1.2.1
+        image: fashionxavier/simple-login:1.2.2
         ports:
         - containerPort: 3000
         env:
